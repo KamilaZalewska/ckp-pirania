@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontakt | CKP Pirania</title>
+
+    <link rel="stylesheet" href="CSS/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Mali:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+</head>
+
+<body class="contact-page">
+
+<header>
+
+    <div class="logo">
+        <img src="Photos/logo.png" alt="Logo CKP Pirania">
+        <div class="logo-text">
+            <h1>CKP Pirania</h1>
+            <span>Częstochowski Klub Pływacki</span>
+        </div>
+    </div>
+
+    <nav>
+        <ul>
+            <li><a href="ckp_pirania.html">Strona główna</a></li>
+            <li><a href="informacje.html">Informacje</a></li>
+            <li><a href="aktualnosci.html">Aktualności</a></li>
+            <li><a href="kontakt.html" class="active-link">Kontakt</a></li>
+        </ul>
+    </nav>
+
+    <a href="https://www.facebook.com/CKPPIRANIA" class="fb-icon" target="_blank">
+        <img src="Photos/facebook.png" alt="Facebook CKP Pirania">
+    </a>
+
+    <div class="mobile-menu-btn">☰</div>
+    <div class="mobile-panel">
+    <ul>
+        <li><a href="ckp_pirania.html">Strona główna</a></li>
+        <li><a href="aktualnosci.html">Aktualności</a></li>
+        <li><a href="informacje.html">Informacje</a></li>
+        <li><a href="kontakt.html">Kontakt</a></li>
+    </ul>
+</div>
+</header>
+
+<main>
+
+<section class="contact-hero">
+    <h1>Skontaktuj się z nami</h1>
+    <p>Masz pytania dotyczące zajęć, zapisów lub lokalizacji treningów? Jesteśmy tu, aby pomóc.</p>
+</section>
+
+<section class="contact-section">
+
+    <!-- BLOKI KONTAKTOWE -->
+    <div class="contact-info-grid">
+
+        <div class="contact-info-box">
+            <img src="Photos/mail.png" alt="Email">
+            <h3>Email</h3>
+            <p>ckp.pirania@op.pl</p>
+        </div>
+
+        <div class="contact-info-box">
+            <img src="Photos/phone.png" alt="Telefon">
+            <h3>Telefon</h3>
+            <p>608 722 100</p>
+        </div>
+
+        <div class="contact-info-box">
+    <img src="Photos/fb.png" alt="Facebook">
+    <h3>Facebook</h3>
+    <a href="https://www.facebook.com/CKPPIRANIA" target="_blank" class="fb-link">Odwiedź nas</a>
+</div>
+
+
+    </div>
+
+    <!-- FORMULARZ -->
+    <div class="contact-form">
+        <h3>Napisz do nas</h3>
+
+        <form id="contactForm">
+            <label for="name">Imię i nazwisko</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Adres e-mail</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="message">Wiadomość</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+
+            <button type="submit" id="sendBtn" class="btn-primary">Wyślij wiadomość</button>
+        </form>
+    </div>
+
+    <div id="successMessage" class="success-hidden">
+        Twoja wiadomość została wysłana!
+    </div>
+
+    <!-- LOKALIZACJE TRENINGOWE -->
+    <h2 class="locations-title">Nasze lokalizacje treningowe</h2>
+
+    <div class="locations-grid">
+
+    <div class="location-card">
+        <h4>Pływalnia SP 2</h4>
+        <p>ul. Baczyńskiego 2, 42-224 Częstochowa</p>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2519.7554888653!2d19.128978299999996!3d50.83569279999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4710b4213fce9515%3A0x244a4ba66d044bdb!2sP%C5%82ywalnia%20przy%20Szkole%20Podstawowej%20nr%202!5e0!3m2!1spl!2spl!4v1784458559231!5m2!1spl!2spl" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+    </div>
+
+    <div class="location-card">
+        <h4>Pływalnia II LO im. Traugutta</h4>
+        <p>ul. Kilińskiego 62, 42-218 Częstochowa</p>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2520.671532036717!2d19.11262971265571!3d50.81872417154664!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4710b5d46eb9fc15%3A0x7df3721b27302da1!2sP%C5%82ywalnia%20przy%20II%20LO%20im.%20R.%20Traugutta!5e0!3m2!1spl!2spl!4v1784458583154!5m2!1spl!2spl" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+    </div>
+
+</div>
+
+<!-- STADION – OSOBNA KARTA NA ŚRODKU -->
+<div class="location-card stadium-center">
+    <h4>Stadion – zajęcia biegowe</h4>
+    <p>ul. Generała Jana Henryka Dąbrowskiego 58/64, 42-218 Częstochowa</p>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d529.8776280883562!2d19.112295928199504!3d50.82121681735593!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4710b5d545d06bc1%3A0xcbb7f116c76a5cdc!2sMiejski%20Stadion%20Lekkoatletyczny!5e0!3m2!1spl!2spl!4v1784455660092!5m2!1spl!2spl"
+            allowfullscreen="" loading="lazy"></iframe>
+</div>
+
+
+    </div>
+
+</section>
+
+</main>
+
+<footer>
+    <p>© 2024 CKP Pirania – Częstochowski Klub Pływacki</p>
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>
