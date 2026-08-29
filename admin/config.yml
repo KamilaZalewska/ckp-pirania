@@ -1,6 +1,14 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: KamilaZalewska/ckp-pirania
   branch: main
+  
+local_backend: true
+publish_mode: editorial_workflow
+
+oauth:
+  provider: github
+  redirect_uri: https://ckp-pirania.netlify.app/admin/
 
 media_folder: "photos/aktualnosci"
 public_folder: "/photos/aktualnosci"
