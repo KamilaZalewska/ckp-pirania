@@ -53,8 +53,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     <p class="news-date">${formatDate(post.date)}</p>
                     <p class="news-lead">${lead}</p>
                     <button type="button" class="news-more">Czytaj więcej</button>
-                    <div class="news-body" data-raw="${encodeURIComponent(post.body)}"></div>
                 </div>
+                <div class="news-body" data-raw="${encodeURIComponent(post.body)}"></div>
             </article>
         `;
     }

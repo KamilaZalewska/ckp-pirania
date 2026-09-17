@@ -1727,8 +1727,9 @@ footer p {
 
 .news-body {
     display: none;
+    grid-column: 1 / -1;
     margin-top: 10px;
-    padding-top: 10px;
+    padding-top: 15px;
     border-top: 1px solid rgba(13,63,88,0.15);
     color: #0d3f58;
     line-height: 1.7;
