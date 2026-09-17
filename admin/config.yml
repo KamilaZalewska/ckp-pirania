@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: KamilaZalewska/Strony-internetowe
+  repo: KamilaZalewska/ckp-pirania
   branch: main
 
 media_folder: "Photos/aktualnosci"
