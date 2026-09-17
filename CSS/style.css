@@ -1594,6 +1594,17 @@ nav a.active-link::after {
         width: 100%;
     }
 
+    /* ========================= */
+    /* AKTUALNOŚCI – MOBILE       */
+    /* ========================= */
+    .news-item-full {
+        grid-template-columns: 1fr;
+    }
+
+    .news-photo {
+        min-height: 200px;
+    }
+
 } /* ← KONIEC @media — NAJWAŻNIEJSZE */
 
 
@@ -1615,4 +1626,118 @@ footer p {
     margin: 0;
     opacity: 0.85;
     font-weight: 500;
+}
+
+/* ========================= */
+/* AKTUALNOŚCI                */
+/* ========================= */
+.news-page {
+    max-width: 1100px;
+    margin: 60px auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.news-page-desc {
+    max-width: 700px;
+    margin: 0 auto 40px auto;
+    font-size: 18px;
+    color: #0d3f58;
+    line-height: 1.6;
+}
+
+.news-list {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    text-align: left;
+}
+
+.news-item-full {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 25px;
+    background: rgba(255,255,255,0.9);
+    padding: 20px;
+    border-radius: 18px;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.news-item-full:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 35px rgba(0,0,0,0.22);
+}
+
+.news-photo {
+    width: 100%;
+    height: 100%;
+    min-height: 180px;
+    object-fit: cover;
+    border-radius: 14px;
+}
+
+.news-content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.news-content h3 {
+    font-size: 22px;
+    color: #022b3a;
+}
+
+.news-date {
+    font-size: 14px;
+    color: #2156ca;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.news-lead {
+    font-size: 16px;
+    color: #0d3f58;
+    line-height: 1.6;
+}
+
+.news-more {
+    align-self: flex-start;
+    padding: 8px 20px;
+    background-color: #2156ca;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.news-more:hover {
+    background-color: #011d28;
+}
+
+.news-body {
+    display: none;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(13,63,88,0.15);
+    color: #0d3f58;
+    line-height: 1.7;
+}
+
+.news-item-full.expanded .news-body {
+    display: block;
+}
+
+.news-body img {
+    max-width: 100%;
+    border-radius: 10px;
+    margin: 10px 0;
+}
+
+.news-empty {
+    font-size: 18px;
+    color: #0d3f58;
 }

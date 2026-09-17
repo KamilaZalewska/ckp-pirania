@@ -1,0 +1,20 @@
+backend:
+  name: github
+  repo: KamilaZalewska/Strony-internetowe
+  branch: main
+
+media_folder: "Photos/aktualnosci"
+public_folder: "/Photos/aktualnosci"
+
+collections:
+  - name: "aktualnosci"
+    label: "Aktualności"
+    folder: "content/aktualnosci"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Tytuł", name: "title", widget: "string" }
+      - { label: "Data", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false }
+      - { label: "Lead", name: "lead", widget: "text" }
+      - { label: "Zdjęcie główne", name: "image", widget: "image" }
+      - { label: "Treść", name: "body", widget: "markdown" }
