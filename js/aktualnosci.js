@@ -74,18 +74,44 @@ document.addEventListener("DOMContentLoaded", () => {
 
     container.addEventListener("click", e => {
         const btn = e.target.closest(".news-more");
-        if (!btn) return;
+        if (btn) {
+            const article = btn.closest(".news-item-full");
+            const body = article.querySelector(".news-body");
+            const expanded = article.classList.toggle("expanded");
 
-        const article = btn.closest(".news-item-full");
-        const body = article.querySelector(".news-body");
-        const expanded = article.classList.toggle("expanded");
+            if (expanded && !body.dataset.rendered) {
+                const raw = decodeURIComponent(body.dataset.raw);
+                body.innerHTML = renderBody(raw);
+                body.dataset.rendered = "1";
+            }
 
-        if (expanded && !body.dataset.rendered) {
-            const raw = decodeURIComponent(body.dataset.raw);
-            body.innerHTML = renderBody(raw);
-            body.dataset.rendered = "1";
+            btn.textContent = expanded ? "Zwiń" : "Czytaj więcej";
+            return;
         }
 
-        btn.textContent = expanded ? "Zwiń" : "Czytaj więcej";
+        const clickedImage = e.target.closest(".news-photo, .news-gallery img");
+        if (clickedImage) openLightbox(clickedImage.src, clickedImage.alt);
     });
+
+    /* ============================
+       LIGHTBOX - PODGLĄD ZDJĘĆ
+       ============================ */
+    const lightbox = document.getElementById("imageLightbox");
+    const lightboxImg = lightbox ? lightbox.querySelector("img") : null;
+
+    function openLightbox(src, alt) {
+        if (!lightbox || !lightboxImg) return;
+        lightboxImg.src = src;
+        lightboxImg.alt = alt;
+        lightbox.classList.add("open");
+    }
+
+    function closeLightbox() {
+        if (!lightbox) return;
+        lightbox.classList.remove("open");
+    }
+
+    if (lightbox) {
+        lightbox.addEventListener("click", closeLightbox);
+    }
 });
