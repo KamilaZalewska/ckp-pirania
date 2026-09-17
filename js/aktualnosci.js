@@ -13,6 +13,25 @@ document.addEventListener("DOMContentLoaded", () => {
         return div.innerHTML;
     }
 
+    function renderBody(raw) {
+        const imageRegex = /!\[([^\]]*)\]\(([^)]+)\)/g;
+        const images = [];
+        let match;
+
+        while ((match = imageRegex.exec(raw)) !== null) {
+            images.push({ alt: match[1], src: match[2] });
+        }
+
+        const textOnly = raw.replace(imageRegex, "").trim();
+        const textHtml = typeof marked !== "undefined" ? marked.parse(textOnly) : textOnly;
+
+        const galleryHtml = images.length
+            ? `<div class="news-gallery">${images.map(img => `<img src="${img.src}" alt="${img.alt}">`).join("")}</div>`
+            : "";
+
+        return textHtml + galleryHtml;
+    }
+
     function formatDate(dateStr) {
         const date = new Date(dateStr);
         if (isNaN(date)) return dateStr;
@@ -63,7 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (expanded && !body.dataset.rendered) {
             const raw = decodeURIComponent(body.dataset.raw);
-            body.innerHTML = typeof marked !== "undefined" ? marked.parse(raw) : raw;
+            body.innerHTML = renderBody(raw);
             body.dataset.rendered = "1";
         }
 
