@@ -10,14 +10,23 @@ function parseFrontmatter(raw) {
 
     const [, frontmatterBlock, body] = match;
     const data = {};
+    let currentKey = null;
 
+    // Decap CMS zawija długie pola YAML na kilka wciętych linii (plain scalar
+    // folding) — linia bez "klucz:" na początku jest kontynuacją poprzedniego pola.
     frontmatterBlock.split(/\r?\n/).forEach(line => {
         const lineMatch = line.match(/^([a-zA-Z0-9_]+):\s*(.*)$/);
-        if (!lineMatch) return;
 
-        const [, key, rawValue] = lineMatch;
-        const value = rawValue.trim().replace(/^["'](.*)["']$/, "$1");
-        data[key] = value;
+        if (lineMatch) {
+            const [, key, rawValue] = lineMatch;
+            data[key] = rawValue.trim().replace(/^["'](.*)["']$/, "$1");
+            currentKey = key;
+            return;
+        }
+
+        if (currentKey && line.trim()) {
+            data[currentKey] += " " + line.trim();
+        }
     });
 
     data.body = body.trim();
