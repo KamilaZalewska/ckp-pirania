@@ -11,21 +11,34 @@ function parseFrontmatter(raw) {
     const [, frontmatterBlock, body] = match;
     const data = {};
     let currentKey = null;
+    let foldMode = null; // ">" - złącz kontynuacje spacją, "|" - zachowaj nowe linie
 
     // Decap CMS zawija długie pola YAML na kilka wciętych linii (plain scalar
-    // folding) — linia bez "klucz:" na początku jest kontynuacją poprzedniego pola.
+    // folding, np. "lead: >-") — linia bez "klucz:" na początku jest kontynuacją
+    // poprzedniego pola.
     frontmatterBlock.split(/\r?\n/).forEach(line => {
         const lineMatch = line.match(/^([a-zA-Z0-9_]+):\s*(.*)$/);
 
         if (lineMatch) {
             const [, key, rawValue] = lineMatch;
-            data[key] = rawValue.trim().replace(/^["'](.*)["']$/, "$1");
+            const trimmed = rawValue.trim();
+            const blockIndicator = trimmed.match(/^([|>])[-+]?$/);
+
+            if (blockIndicator) {
+                // sam wskaźnik bloku YAML (>, >-, |, |-) - wartość dopiero w kolejnych liniach
+                data[key] = "";
+                foldMode = blockIndicator[1];
+            } else {
+                data[key] = trimmed.replace(/^["'](.*)["']$/, "$1");
+                foldMode = null;
+            }
             currentKey = key;
             return;
         }
 
         if (currentKey && line.trim()) {
-            data[currentKey] += " " + line.trim();
+            const separator = foldMode === "|" ? "\n" : " ";
+            data[currentKey] = data[currentKey] ? data[currentKey] + separator + line.trim() : line.trim();
         }
     });
 
