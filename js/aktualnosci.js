@@ -90,7 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         const clickedImage = e.target.closest(".news-photo, .news-gallery img");
-        if (clickedImage) openLightbox(clickedImage.src, clickedImage.alt);
+        if (clickedImage) openLightbox(clickedImage);
     });
 
     /* ============================
@@ -98,11 +98,40 @@ document.addEventListener("DOMContentLoaded", () => {
        ============================ */
     const lightbox = document.getElementById("imageLightbox");
     const lightboxImg = lightbox ? lightbox.querySelector("img") : null;
+    const lightboxPrev = lightbox ? lightbox.querySelector(".lightbox-prev") : null;
+    const lightboxNext = lightbox ? lightbox.querySelector(".lightbox-next") : null;
 
-    function openLightbox(src, alt) {
+    let album = [];
+    let albumIndex = 0;
+
+    function showAlbumImage() {
+        const img = album[albumIndex];
+        if (!img || !lightboxImg) return;
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+    }
+
+    function showNextImage() {
+        if (album.length < 2) return;
+        albumIndex = (albumIndex + 1) % album.length;
+        showAlbumImage();
+    }
+
+    function showPrevImage() {
+        if (album.length < 2) return;
+        albumIndex = (albumIndex - 1 + album.length) % album.length;
+        showAlbumImage();
+    }
+
+    function openLightbox(imgEl) {
         if (!lightbox || !lightboxImg) return;
-        lightboxImg.src = src;
-        lightboxImg.alt = alt;
+
+        const article = imgEl.closest(".news-item-full");
+        album = article ? Array.from(article.querySelectorAll(".news-photo, .news-body img")) : [imgEl];
+        albumIndex = Math.max(0, album.indexOf(imgEl));
+
+        showAlbumImage();
+        lightbox.classList.toggle("single", album.length < 2);
         lightbox.classList.add("open");
     }
 
@@ -112,6 +141,30 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (lightbox) {
-        lightbox.addEventListener("click", closeLightbox);
+        lightbox.addEventListener("click", e => {
+            if (e.target.closest(".lightbox-nav")) return;
+            closeLightbox();
+        });
+
+        if (lightboxPrev) {
+            lightboxPrev.addEventListener("click", e => {
+                e.stopPropagation();
+                showPrevImage();
+            });
+        }
+
+        if (lightboxNext) {
+            lightboxNext.addEventListener("click", e => {
+                e.stopPropagation();
+                showNextImage();
+            });
+        }
+
+        document.addEventListener("keydown", e => {
+            if (!lightbox.classList.contains("open")) return;
+            if (e.key === "Escape") closeLightbox();
+            if (e.key === "ArrowRight") showNextImage();
+            if (e.key === "ArrowLeft") showPrevImage();
+        });
     }
 });
