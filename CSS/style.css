@@ -54,12 +54,14 @@ img {
     border-bottom: 2px solid #d0d7e2;
     padding: 8px 20px;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    gap: 15px;
+    gap: 10px 15px;
     font-size: 15px;
     font-weight: 600;
     color: #1a2a3a;
     justify-content: center;
+    text-align: center;
 }
 
 .grant-bar img {
@@ -77,6 +79,8 @@ header {
     box-shadow: 0 2px 10px rgba(0,0,0,0.25);
     padding: 12px 30px;
     display: flex;
+    flex-wrap: wrap;
+    row-gap: 10px;
     align-items: center;
     gap: 20px;
 }
@@ -125,7 +129,8 @@ header .logo-text span {
 nav ul {
     list-style: none;
     display: flex;
-    gap: 30px;
+    flex-wrap: wrap;
+    gap: 10px 24px;
     justify-content: center;
     margin-top: 10px;
 }
@@ -138,7 +143,9 @@ nav a {
     position: relative;
     color: #e8f4ff;
     font-weight: 700;
+    font-size: 15px;
     padding-bottom: 4px;
+    white-space: nowrap;
     transition: transform 0.25s ease;
 }
 
@@ -185,6 +192,10 @@ nav a:hover {
 /* HERO – baner + gradient + tekst */
 .hero {
     position: relative;
+    width: 100%;
+    height: 480px;
+    overflow: hidden;
+    margin: 0 0 40px;
 }
 
 .hero::before {
@@ -200,6 +211,9 @@ nav a:hover {
 
 .hero img {
     width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
     display: block;
     margin-top: 0;
 }
@@ -860,13 +874,6 @@ nav a.active-link::after {
     border-radius: 2px;
 }
 
-/* PARALLAX HERO */
-.hero {
-    background-attachment: fixed;
-    background-size: cover;
-    background-position: center;
-}
-
 /* STRZAŁKA POWROTU NA GÓRĘ */
 #backToTop {
     position: fixed;
@@ -1240,10 +1247,10 @@ nav a.active-link::after {
 }
 
 /* ========================= */
-/*   MOBILE VERSION (≤768px) */
+/*   MOBILE VERSION (≤1024px) */
 /* ========================= */
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
 
     /* GLOBAL */
     main {
@@ -1283,13 +1290,22 @@ nav a.active-link::after {
         font-size: 14px;
     }
 
+    .fb-icon {
+        margin-left: 0;
+    }
+
+    .fb-icon img {
+        width: 52px;
+        height: 52px;
+    }
+
     nav ul {
         display: none;
     }
 
     .mobile-menu-btn {
         display: block;
-        font-size: 34px;
+        font-size: 42px;
         color: #e8f4ff;
         cursor: pointer;
         user-select: none;
@@ -1302,7 +1318,7 @@ nav a.active-link::after {
         width: 75%;
         height: 100vh;
         top: 0;
-        padding-top: 120px;
+        padding: 120px 30px 30px;
         background: #0d1b2a;
         overflow-y: auto;
         box-shadow: -4px 0 20px rgba(0,0,0,0.4);
@@ -1335,7 +1351,14 @@ nav a.active-link::after {
     .hero {
         display: flex;
         flex-direction: column;
-        background-attachment: scroll;
+        height: auto;
+        overflow: visible;
+        margin: 0 0 30px;
+    }
+
+    .hero img {
+        height: 260px;
+        object-position: center 25%;
     }
 
     .hero-text {
@@ -1385,6 +1408,7 @@ nav a.active-link::after {
 
     .why-pirania {
         flex-direction: column;
+        align-items: stretch;
         gap: 25px;
         padding: 0 5px;
     }
@@ -1394,21 +1418,41 @@ nav a.active-link::after {
     }
 
     .why-vertical-carousel {
+        position: relative;
         width: 100%;
-        height: auto;
-        position: static;
+        max-width: 420px;
+        height: 380px;
         margin: 0 auto;
         padding: 0;
     }
 
-    .why-vertical-carousel img {
+    /* karuzela pionowa: zdjęcia nakładają się góra/dół, bez przesunięcia w bok */
+    .why-vertical-carousel img,
+    .why-vertical-carousel img.top,
+    .why-vertical-carousel img.active,
+    .why-vertical-carousel img.bottom {
+        left: 0;
         width: 100%;
-        height: auto;
-        position: static;
+        height: 230px;
         transform: none;
+    }
+
+    .why-vertical-carousel img.top {
+        top: 0;
+        opacity: 0.45;
+        transform: scale(0.92);
+    }
+
+    .why-vertical-carousel img.active {
+        top: 75px;
         opacity: 1;
-        margin-bottom: 15px;
-        box-shadow: none;
+        transform: scale(1);
+    }
+
+    .why-vertical-carousel img.bottom {
+        top: 150px;
+        opacity: 0.45;
+        transform: scale(0.92);
     }
 
     /* ========================= */
@@ -1594,23 +1638,107 @@ nav a.active-link::after {
         width: 100%;
     }
 
-    /* ========================= */
-    /* AKTUALNOŚCI – MOBILE       */
-    /* ========================= */
-    .news-item-full {
-        grid-template-columns: 1fr;
-    }
-
-    .news-photo {
-        min-height: 200px;
-    }
-
-    .news-gallery {
-        grid-template-columns: 1fr;
-    }
-
 } /* ← KONIEC @media — NAJWAŻNIEJSZE */
 
+/* ========================= */
+/*   MAŁE TELEFONY (≤420px)  */
+/* ========================= */
+
+@media (max-width: 420px) {
+
+    header {
+        padding: 8px 10px;
+        gap: 10px;
+    }
+
+    header .logo {
+        gap: 8px;
+    }
+
+    header .logo img {
+        height: 52px;
+    }
+
+    header .logo-text h1 {
+        font-size: 16px;
+    }
+
+    header .logo-text span {
+        font-size: 11px;
+    }
+
+    .fb-icon img {
+        width: 42px;
+        height: 42px;
+    }
+
+    .mobile-menu-btn {
+        font-size: 34px;
+    }
+
+    .grant-bar {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+
+    .grant-bar img {
+        height: 28px;
+    }
+
+    .hero img {
+        height: 200px;
+    }
+
+    .why-vertical-carousel {
+        height: 320px;
+    }
+
+    .why-vertical-carousel img,
+    .why-vertical-carousel img.top,
+    .why-vertical-carousel img.active,
+    .why-vertical-carousel img.bottom {
+        height: 190px;
+    }
+
+    .why-vertical-carousel img.active {
+        top: 65px;
+    }
+
+    .why-vertical-carousel img.bottom {
+        top: 130px;
+    }
+
+    .hero-text {
+        padding: 25px 15px;
+    }
+
+    .hero-text h2 {
+        font-size: 21px;
+    }
+
+    .contact-hero {
+        padding: 50px 15px;
+    }
+
+    .contact-hero h1 {
+        font-size: 30px;
+    }
+
+    .contact-hero p {
+        font-size: 16px;
+    }
+
+    .locations-title,
+    .pricing-box h2,
+    .trainers-section h2,
+    .info-hero h2 {
+        font-size: 24px;
+    }
+
+    .cta-box h2 {
+        font-size: 22px;
+    }
+}
 
 /* ========================= */
 /* STOPKA                    */
@@ -1659,13 +1787,13 @@ footer p {
 
 .news-item-full {
     display: grid;
-    grid-template-columns: 240px 1fr;
-    gap: 25px;
-    max-width: 720px;
+    grid-template-columns: 1fr 1fr;
+    max-width: 1100px;
     margin: 0 auto;
-    background: rgba(255,255,255,0.9);
-    padding: 20px;
-    border-radius: 18px;
+    background: #fff;
+    padding: 0;
+    border-radius: 20px;
+    overflow: hidden;
     box-shadow: 0 6px 24px rgba(0,0,0,0.15);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -1675,64 +1803,108 @@ footer p {
     box-shadow: 0 12px 35px rgba(0,0,0,0.22);
 }
 
+/* kafelek ze zdjęciem i kafelek tekstowy - na przemian lewo/prawo */
+.news-item-full .news-photo {
+    order: 1;
+}
+
+.news-item-full .news-content {
+    order: 2;
+}
+
+.news-item-full .news-body {
+    order: 3;
+}
+
+.news-item-full:nth-child(even) .news-photo {
+    order: 2;
+}
+
+.news-item-full:nth-child(even) .news-content {
+    order: 1;
+}
+
 .news-photo {
     width: 100%;
     height: 100%;
-    min-height: 160px;
-    max-height: 220px;
+    min-height: 320px;
     object-fit: cover;
-    border-radius: 14px;
+    border-radius: 0;
+    display: block;
 }
 
 .news-content {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 14px;
+    background: #e9f2f9;
+    padding: 45px 40px;
 }
 
 .news-content h3 {
-    font-size: 22px;
+    font-size: 28px;
     color: #022b3a;
 }
 
 .news-date {
-    font-size: 14px;
+    font-size: 16px;
     color: #2156ca;
-    font-weight: 600;
+    font-weight: 700;
     text-transform: capitalize;
 }
 
 .news-lead {
     font-size: 16px;
     color: #0d3f58;
-    line-height: 1.6;
+    line-height: 1.7;
+    text-align: left;
+    max-width: 380px;
 }
 
 .news-more {
-    align-self: flex-start;
-    padding: 8px 20px;
+    align-self: center;
+    margin-top: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 26px;
     background-color: #2156ca;
     color: #fff;
     font-size: 15px;
     font-weight: 700;
     border: none;
-    border-radius: 10px;
+    border-radius: 999px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.news-more::after {
+    content: "→";
+    font-size: 16px;
+    transition: transform 0.2s ease;
+}
+
+.news-item-full.expanded .news-more::after {
+    content: "↑";
 }
 
 .news-more:hover {
     background-color: #011d28;
+    transform: translateX(2px);
 }
 
 .news-body {
     display: none;
     grid-column: 1 / -1;
-    margin-top: 10px;
-    padding-top: 15px;
+    margin-top: 0;
+    padding: 25px 40px 35px;
     border-top: 1px solid rgba(13,63,88,0.15);
     color: #0d3f58;
     line-height: 1.7;
+    text-align: left;
 }
 
 .news-item-full.expanded .news-body {
@@ -1801,4 +1973,107 @@ footer p {
     font-size: 40px;
     color: #fff;
     cursor: pointer;
+}
+
+/* strzałki przewijania zdjęć w lightboxie */
+.lightbox-nav {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 54px;
+    height: 54px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.25s ease, transform 0.25s ease;
+    z-index: 1000000;
+}
+
+.lightbox-nav:hover {
+    background: rgba(255,255,255,0.3);
+}
+
+.lightbox-prev {
+    left: 20px;
+}
+
+.lightbox-next {
+    right: 20px;
+}
+
+.image-lightbox.single .lightbox-nav {
+    display: none;
+}
+
+/* ========================= */
+/* AKTUALNOŚCI – MOBILE       */
+/* ========================= */
+@media (max-width: 1024px) {
+
+    .news-item-full {
+        grid-template-columns: 1fr;
+    }
+
+    /* na telefonie zawsze zdjęcie na górze, niezależnie od kolejności */
+    .news-item-full .news-photo,
+    .news-item-full:nth-child(even) .news-photo {
+        order: 1;
+    }
+
+    .news-item-full .news-content,
+    .news-item-full:nth-child(even) .news-content {
+        order: 2;
+    }
+
+    .news-photo {
+        min-height: 220px;
+    }
+
+    .news-content {
+        padding: 30px 24px;
+    }
+
+    .news-body {
+        padding: 20px 24px 28px;
+    }
+
+    .lightbox-nav {
+        width: 42px;
+        height: 42px;
+        font-size: 18px;
+    }
+
+    .lightbox-prev {
+        left: 10px;
+    }
+
+    .lightbox-next {
+        right: 10px;
+    }
+
+    .news-gallery {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 420px) {
+
+    .news-content {
+        padding: 24px 18px;
+    }
+
+    .news-content h3 {
+        font-size: 22px;
+    }
+
+    .news-body {
+        padding: 18px 18px 24px;
+    }
 }
