@@ -20,8 +20,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
         photos.forEach(img => {
             img.addEventListener("click", () => {
-                const last = photos.pop();
-                photos.unshift(last);
+                if (img.classList.contains("bottom")) {
+                    // dolne zdjęcie -> karuzela kręci się z dołu do góry
+                    const first = photos.shift();
+                    photos.push(first);
+                } else {
+                    // górne/aktywne zdjęcie -> karuzela kręci się z góry do dołu
+                    const last = photos.pop();
+                    photos.unshift(last);
+                }
                 applyClasses();
             });
         });
@@ -188,6 +195,12 @@ document.addEventListener("click", (e) => {
             role: "Instruktorka pływania rekreacyjnego",
             photo: "Photos/trener5-card.jpg",
             description: "Anna prowadzi zajęcia dla osób dorosłych oraz grup rekreacyjnych. Skupia się na poprawie techniki, kondycji oraz przyjemności z pływania."
+        },
+         trener6: {
+            name: "Katarzyna Otrębska",
+            role: "Instruktorka pływania rekreacyjnego",
+            photo: "Photos/trener6-card.jpg",
+            description: ""
         }
     };
 
