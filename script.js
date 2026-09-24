@@ -241,6 +241,45 @@ document.addEventListener("click", (e) => {
         });
     }
 
+    /* POWIĘKSZENIE ZDJĘCIA TRENERA (zamknięcie krzyżykiem, tłem lub Escape) */
+    const trainerPhotos = document.querySelectorAll(".trainer-card .trainer-photo");
+
+    if (trainerPhotos.length) {
+        const photoLightbox = document.createElement("div");
+        photoLightbox.className = "image-lightbox trainer-photo-lightbox";
+        photoLightbox.innerHTML = '<span class="lightbox-close" role="button" aria-label="Zamknij">&times;</span><img src="" alt="">';
+        document.body.appendChild(photoLightbox);
+
+        const lightboxImage = photoLightbox.querySelector("img");
+        const lightboxClose = photoLightbox.querySelector(".lightbox-close");
+
+        const closePhotoLightbox = () => photoLightbox.classList.remove("open");
+
+        trainerPhotos.forEach(photo => {
+            photo.addEventListener("click", () => {
+                const card = photo.closest(".trainer-card");
+                const data = card && trainerData[card.dataset.trainer];
+                const bg = photo.style.backgroundImage.match(/url\(["']?(.*?)["']?\)/);
+                const src = data ? data.photo : (bg ? bg[1] : "");
+                if (!src) return;
+
+                lightboxImage.src = src;
+                lightboxImage.alt = card.querySelector("h3") ? card.querySelector("h3").textContent : "Zdjęcie trenera";
+                photoLightbox.classList.add("open");
+            });
+        });
+
+        lightboxClose.addEventListener("click", closePhotoLightbox);
+
+        photoLightbox.addEventListener("click", e => {
+            if (e.target === photoLightbox) closePhotoLightbox();
+        });
+
+        document.addEventListener("keydown", e => {
+            if (e.key === "Escape") closePhotoLightbox();
+        });
+    }
+
     /* ============================
        8. FORMULARZ KONTAKTOWY + EMAILJS
        ============================ */
@@ -332,5 +371,27 @@ document.addEventListener("click", (e) => {
             }
         });
     }
+
+    /* ============================
+       DOKUMENTY "WKRÓTCE"
+       ============================ */
+    document.querySelectorAll("a.coming-soon").forEach(link => {
+        let note = null;
+
+        link.addEventListener("click", e => {
+            e.preventDefault();
+
+            if (!note) {
+                note = document.createElement("span");
+                note.className = "coming-soon-note";
+                note.textContent = "Wkrótce zostanie dodany";
+                link.insertAdjacentElement("afterend", note);
+            }
+
+            note.classList.add("visible");
+            clearTimeout(note.hideTimer);
+            note.hideTimer = setTimeout(() => note.classList.remove("visible"), 4000);
+        });
+    });
 });
 
