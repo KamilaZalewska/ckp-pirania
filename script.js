@@ -41,9 +41,23 @@ document.addEventListener("DOMContentLoaded", () => {
     const mobileBtn = document.querySelector('.mobile-menu-btn');
     const mobilePanel = document.querySelector('.mobile-panel');
 
+    function setMobilePanelOpen(isOpen) {
+        if (!mobilePanel) return;
+        mobilePanel.classList.toggle('open', isOpen);
+        if (mobileBtn) mobileBtn.setAttribute('aria-expanded', String(isOpen));
+    }
+
     if (mobileBtn && mobilePanel) {
         mobileBtn.addEventListener('click', () => {
-            mobilePanel.classList.toggle('open');
+            setMobilePanelOpen(!mobilePanel.classList.contains('open'));
+        });
+
+        // dostępność klawiaturowa - przycisk to <div role="button">, nie natywny <button>
+        mobileBtn.addEventListener('keydown', e => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                setMobilePanelOpen(!mobilePanel.classList.contains('open'));
+            }
         });
     }
 
@@ -72,7 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     // Zamykamy menu mobilne, jeśli kliknęliśmy z jego poziomu
                     if (mobilePanel && mobilePanel.classList.contains("open")) {
-                        mobilePanel.classList.remove("open");
+                        setMobilePanelOpen(false);
                     }
                 }
             }
@@ -89,7 +103,7 @@ document.addEventListener("click", (e) => {
     const clickedHamburger = mobileBtn.contains(e.target);
 
     if (!clickedInsidePanel && !clickedHamburger) {
-        mobilePanel.classList.remove("open");
+        setMobilePanelOpen(false);
     }
 });
 
@@ -255,17 +269,31 @@ document.addEventListener("click", (e) => {
 
         const closePhotoLightbox = () => photoLightbox.classList.remove("open");
 
-        trainerPhotos.forEach(photo => {
-            photo.addEventListener("click", () => {
-                const card = photo.closest(".trainer-card");
-                const data = card && trainerData[card.dataset.trainer];
-                const bg = photo.style.backgroundImage.match(/url\(["']?(.*?)["']?\)/);
-                const src = data ? data.photo : (bg ? bg[1] : "");
-                if (!src) return;
+        function openTrainerPhoto(photo) {
+            const card = photo.closest(".trainer-card");
+            const data = card && trainerData[card.dataset.trainer];
+            const bg = photo.style.backgroundImage.match(/url\(["']?(.*?)["']?\)/);
+            const src = data ? data.photo : (bg ? bg[1] : "");
+            if (!src) return;
 
-                lightboxImage.src = src;
-                lightboxImage.alt = card.querySelector("h3") ? card.querySelector("h3").textContent : "Zdjęcie trenera";
-                photoLightbox.classList.add("open");
+            lightboxImage.src = src;
+            lightboxImage.alt = card.querySelector("h3") ? card.querySelector("h3").textContent : "Zdjęcie trenera";
+            photoLightbox.classList.add("open");
+        }
+
+        trainerPhotos.forEach(photo => {
+            // dostępność klawiaturowa - to <div> z tłem, nie natywny element klikalny
+            photo.setAttribute("role", "button");
+            photo.setAttribute("tabindex", "0");
+            photo.setAttribute("aria-label", "Powiększ zdjęcie trenera");
+
+            photo.addEventListener("click", () => openTrainerPhoto(photo));
+
+            photo.addEventListener("keydown", e => {
+                if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    openTrainerPhoto(photo);
+                }
             });
         });
 

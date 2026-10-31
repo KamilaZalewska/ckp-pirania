@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Informacje – CKP Pirania</title>
+    <meta name="description" content="Cennik, dokumenty i najważniejsze informacje dla rodziców i zawodników CKP Pirania – Częstochowskiego Klubu Pływackiego.">
+    <meta property="og:title" content="Informacje – CKP Pirania">
+    <meta property="og:description" content="Cennik, dokumenty i najważniejsze informacje dla rodziców i zawodników CKP Pirania.">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pl_PL">
+    <meta property="og:image" content="Photos/logo.png">
+    <meta name="twitter:card" content="summary">
+    <link rel="icon" type="image/png" href="Photos/logo.png">
     <link rel="stylesheet" href="CSS/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Mali:wght@400;500;600&display=swap" rel="stylesheet">
 
@@ -13,7 +21,7 @@
 
 <header>
     <!-- Panel mobilny -->
-    <div class="mobile-panel">
+    <div class="mobile-panel" id="mobilePanel">
         <ul>
             <li><a href="ckp_pirania.html">Strona główna</a></li>
             <li><a href="aktualnosci.html">Aktualności</a></li>
@@ -47,7 +55,7 @@
     </a>
 
     <!-- PRZYCISK MENU MOBILNEGO - TUTAJ GO BRAKOWAŁO! -->
-    <div class="mobile-menu-btn">☰</div>
+    <div class="mobile-menu-btn" role="button" tabindex="0" aria-label="Otwórz menu" aria-expanded="false" aria-controls="mobilePanel">☰</div>
 </header>
 
 <main>

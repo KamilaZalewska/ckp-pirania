@@ -48,6 +48,17 @@ img {
     height: auto;
 }
 
+/* WIDOCZNY FOKUS DLA NAWIGACJI KLAWIATURĄ */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+    outline: 3px solid #3bb1cb;
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
 .grant-bar {
     width: 100%;
     background: #f5f7fa;
