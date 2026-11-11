@@ -18,18 +18,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
         applyClasses();
 
+        function rotateDown() {
+            // górne zdjęcie -> aktywne, aktywne -> dolne, dolne wraca na górę
+            const last = photos.pop();
+            photos.unshift(last);
+            applyClasses();
+        }
+
+        function rotateUp() {
+            // dolne zdjęcie -> aktywne, aktywne -> górne, górne wraca na dół
+            const first = photos.shift();
+            photos.push(first);
+            applyClasses();
+        }
+
         photos.forEach(img => {
             img.addEventListener("click", () => {
-                if (img.classList.contains("bottom")) {
-                    // dolne zdjęcie -> karuzela kręci się z dołu do góry
-                    const first = photos.shift();
-                    photos.push(first);
-                } else {
-                    // górne/aktywne zdjęcie -> karuzela kręci się z góry do dołu
-                    const last = photos.pop();
-                    photos.unshift(last);
-                }
-                applyClasses();
+                if (img.classList.contains("bottom")) rotateUp();
+                else rotateDown();
             });
         });
     }
