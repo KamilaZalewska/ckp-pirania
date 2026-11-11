@@ -737,15 +737,11 @@ nav a:hover {
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(0,0,0,0.15);
     position: relative;
-    padding: 6px;
-    background: linear-gradient(to right, #2d83ae, #6bb3c3);
 }
 
 .trainers-intro-photo img {
-    display: block;
     width: 100%;
     height: auto;
-    border-radius: 20px;
     object-fit: cover;
     filter: brightness(0.9) saturate(1.05);
     transform: scale(1.06);      /* subtelny zoom */
