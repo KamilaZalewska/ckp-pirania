@@ -1399,7 +1399,7 @@ nav a.active-link::after {
         width: 75%;
         height: 100vh;
         top: 0;
-        padding: 120px 30px 30px;
+        padding: 50px 30px 30px;
         background: #0d1b2a;
         overflow-y: auto;
         box-shadow: -4px 0 20px rgba(0,0,0,0.4);
@@ -1416,7 +1416,7 @@ nav a.active-link::after {
         display: flex;
         flex-direction: column;
         gap: 25px;
-        margin-top: 20px;
+        margin-top: 5px;
     }
 
     .mobile-panel a {
