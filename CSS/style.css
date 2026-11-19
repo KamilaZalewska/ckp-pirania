@@ -1548,6 +1548,13 @@ nav a.active-link::after {
         transform: scale(0.92);
     }
 
+    /* na dotyku :hover "przykleja się" do klikniętego zdjęcia - bazowy hover
+       ma translateX(-50%), co przy left:0 wypychało zdjęcie w lewo */
+    .why-vertical-carousel img:not(.active):hover {
+        opacity: 0.45;
+        transform: scale(0.92);
+    }
+
     /* ========================= */
     /* ZAJĘCIA – zdjęcia         */
     /* ========================= */
